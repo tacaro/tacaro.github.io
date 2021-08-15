@@ -1,15 +1,42 @@
-name: "my-website"
+name: "Tristan Caro"
 navbar:
-  title: "My Website"
+  title: Tristan Caro
   left:
-    - text: "Home"
-      href: index.html
-    - text: "About"
-      href: about.html
+  - text: Home
+    icon: fa-home
+    href: index.html
+  - text: About
+    icon: fa-book-open
+    href: about.html
+  - text: Tools
+    icon: fa-code
+    menu:
+    - text: BacDive Miner
+      href: https://github.com/tacaro/bacdive_lipids
+      icon: fa-github
+    - text: Slime Mold Behavior Model
+      href: https://github.com/tacaro/slime_mold
+      icon: fa-github
+    - text: Spatial Controls on Grazing Behavior
+      href: https://github.com/tacaro/TeamTermite
+      icon: fa-github
+  - text: Tutorials
+    icon: fa-coffee
+    menu:
+    - text: Trace Gas Oxidation Thermo
+      href: geothermo_final/geothermo.html
+      icon: fa-file-alt
+  right:
+  - href: https://github.com/tacaro
+    icon: fa-github
+  - href: https://twitter.com/tris_caro
+    icon: fa-twitter
+  - href: mailto:tristan.caro@colorado.edu
+    icon: fa-paper-plane
 output:
   html_document:
-    theme: cosmo
-    highlight: textmate
+    theme: yeti
+    highlight: zenburn
     css: styles.css
 output_dir: "."
     

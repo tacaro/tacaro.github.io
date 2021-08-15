@@ -1,0 +1,157 @@
+---
+title: "Thermodynamic modeling of soil trace gas oxidation"
+author: "Bay et al. 2020 (Summarized by Tristan Caro and Harp Batther)"
+date: "`r format(Sys.Date(), '%d %b %Y')`"
+output:
+  html_document:
+    df_print: paged
+    toc: yes
+    toc_depth: 2
+    toc_float: yes
+    code_folding: show
+editor_options:
+  chunk_output_type: inline
+---
+
+```{r "load packages", include=FALSE, message=FALSE}
+library(tidyverse)
+library(ggrepel)
+```
+
+# Introduction
+
+Paper: Trace gas oxidizers are widespread and active members of soil microbial communities (Bay et al., 2021)
+
+This paper is a combined metagenomic, biochemical, and modeling approach to determine how soil microbial communities meet energy and carbon needs.
+
+Soil microorganisms are thought to primarily consume organic carbon sources rather than inorganic energy sources, such as trace gases. However, analysis of 40 metagenomes and 757 derived genomes indicated that  >70% of soil bacterial taxa consume inorganic energy sources. This paper focuses on the oxidation of hydrogen, carbon monoxide, and methane within soil at four different locations; wetland, dryland, forest, and grassland. 
+
+Stoichiometric Reaction Relationships:
+$$
+H_{2(gas)} + 0.5~O_{2(gas)} \rightarrow H_2O_{(aq)} \\
+CO_{(gas)} + 0.5~O_{2(gas)} \rightarrow CO_{2(gas)} \\
+CH_{4(gas)} + 2~O_{2(gas)} \rightarrow CO_{2(gas)} + 2H_2O_{(aq)} \\ 
+$$
+
+# Thermodynamic Modeling
+
+In this study, thermodynamic modeling was used to predict the amount of power (JW/s) generated per cell based upon the ex situ oxidation rates and total number of trace gas oxidizers per gram of soil.
+
+First, the activity of the gas species was calculated by dividing the fugacity by the standard state fugacity. Fugacity coefficients for all gases are assumed to be 1 due to  low temperatures and pressures within the soil. Partial pressures are equivalent to fucacity since $f_g^0$ was taken to be 1 bar. We multiplied the partial pressures given, in ppm, by 10e-6 to convert them to bar.
+$$
+a_g = \frac{f_g}{f^0_g} \\ 
+a_g = \text{activities of gas-phase compounds} \\ 
+f_g = \text{fugacity} \\
+f^0_g = \text{standard state fugacity of the respective gas} \\
+$$
+
+Second, the reaction quotient of each reaction was calculated using the activities mentioned above. The reaction quotient $Q_r$ is basically the environmental activity product.
+$$
+Q_r = \prod a^{v_i}_i \\
+a_i = \text{activity for the ith species} \\
+v_i = \text{stoichiometric coefficient of the ith species in the reaction of interest} \\
+$$
+
+Next, the Gibbs energies were calculated at 20C and 1 bar. In the equation below, the natural log of $Q_r$ is taken. However, the authors chose to instead take the log10 of $Q_r$. $\Delta G_r$ was calculated in Joules.
+$$
+\Delta G_r = \Delta G_r^0 + RTlnQ_r \\
+\Delta G_r^0 = \text{standard Gibbs energy} \\
+Q_r = \text{reaction quotient of the indicated reaction} \\
+R = \text{gas constant} \\
+T = \text{temperature in K} \\
+$$
+
+Lastly, the cell-specific power was calculated for each reaction using the rate of reaction, Gibbs energy, and number of oxidizing microbial cells. The rate of the reaction in this case is negative, indicating consumption.
+$$
+P = \frac{r \cdot \Delta G_r}{B} \\
+P = \text{Gibbs energy per unit time per microbial cell (cell-specific power)} \\
+r = \text{rate of reaction} (mol~s^{-1} g_{dry soil}^{-1}) \\ 
+\Delta G_r = \text{Gibbs energy of the reaction} (Jmol^{-1}) \\
+B = \text{number of microbial cells carrying out each of the reactions} (cells~g_{dry soil}^{-1}) \\
+$$
+
+Here are our calculations of the reaction quotient:
+
+$$
+H_2 + 0.5O_2 \rightarrow H_2O \\
+Q = \frac{[H_2O]}{[H_2][O_2]^{(1/2)}} \\
+CO + 0.5 O_2 \rightarrow CO_2 \\
+Q = \frac{[CO_2]}{[CO][O_2]^{(1/2)}} \\
+\space \\
+CH_4 + 2O_2 \rightarrow CO_2 + 2H_2O \\
+Q = \frac{[CO_2][H_2O]^2}{[CH_4][O_2]^2}
+$$
+
+```{r}
+gas_data <- readxl::read_xlsx("gas_data.xlsx")
+
+Rbar = 8.31446261815324E-2 # gas constant with bar
+RJoule = 8.31446261815324
+RkJ = 0.2871
+Temp = 293 # Temp in K
+pO2 = 0.2127825 # atmospheric oxygen concentration (bar)
+pCO2 = 4E-4 # atmospheric CO2 in bar
+
+# PV = nRT
+# P = nRT / V
+gas_data <- gas_data %>%
+  mutate(p_gas = (`Mean concentration (ppm)`*(10^(-6)))) %>% 
+  mutate(fg0 = 1) %>% # assume std fugacity = 1
+  mutate(fg = p_gas) %>% # fugacity of gas equal to partial pressure
+  mutate(ag = fg/fg0) %>%  #activity is ratio of fugacities
+  mutate(Q = case_when(Gas == "H2" ~ 1/ag*(pO2^.5),
+                       Gas == "CO" ~ pCO2/ag*(pO2^.5),
+                       Gas == "CH4" ~ pCO2*1/ag*(pO2^2))) %>% # Q is equal to the product of activities
+           
+  mutate(logQ = log10(Q)) %>% #log10 Q
+  mutate(lnQ = log(Q)) %>% # natural log of Q
+  
+  # Below conditionally assigns delta G0 values
+  mutate(dg0 = case_when(Gas == "H2" ~ -238.0110206,
+                         Gas == "CO" ~ -257.6221235,
+                         Gas == "CH4" ~ -819.5290501)) %>% 
+    
+  # Calculate delta G at environmental conditions (Joules)
+  mutate(dg0_J = dg0*1000) %>% # convert dg0 to joules
+  mutate(dg = dg0_J + RJoule*Temp*logQ) %>% # delta G in Joules
+  
+  # Average cell specific rate of reaction
+  mutate(csr = case_when(Gas == "H2" ~ -1.12E-20,
+                         Gas == "CO" ~ -7.06E-21,
+                         Gas == "CH4" ~ -1.12E-19)) %>% 
+  
+  # Average trace gas oxidizing cell counts, averaged by landscape
+  mutate(B = case_when(Gas == "H2" & Ecosystem == "Wetland" ~ 34446025.8,
+                       Gas == "H2" & Ecosystem == "Grassland" ~ 30794773.42,
+                       Gas == "H2" & Ecosystem == "Forest" ~ 62453310.18,
+                       Gas == "H2" & Ecosystem == "Dryland" ~ 1630814.997,
+                       Gas == "CO" & Ecosystem == "Wetland" ~ 38701753.79,
+                       Gas == "CO" & Ecosystem == "Grassland" ~ 45900935.93,
+                       Gas == "CO" & Ecosystem == "Forest" ~ 117976086.4,
+                       Gas == "CO" & Ecosystem == "Dryland" ~ 2510912.988,
+                       Gas == "CH4" & Ecosystem == "Dryland" ~ 52635.71799,
+                       Gas == "CH4" & Ecosystem == "Wetland" ~ 140393.5214,
+                       Gas == "CH4" & Ecosystem == "Grassland" ~ 140688.9679,
+                       Gas == "CH4" & Ecosystem == "Forest" ~ 693665.0186)) %>% 
+  mutate(P = csr*B*dg/B) # had to multiply CSR by B so as to get cells g-1 s-1 --> cell specific reaction rate g-1
+```
+
+```{r}
+p_gas_data <- gas_data %>% ggplot(aes(x = Gas, y = P)) +
+  geom_col(width = 0.5) +
+  annotation_logticks(side = "l") +
+  theme_classic() +
+  ylab(label = "Cell specific power (W/cell)") +
+  xlab(label = "Electron donor (trace gas)")
+p_gas_data
+```
+
+
+# Conclusion
+
+In short, per cell, there is more power (Watt per cell) provided per mole of methane generated than the other trace gases studied. Molecular hydrogen follows, then carbon monoxide in terms of cell specific power. These power values are calculated directly from free energy calculations at non-standard state conditions using the reaction quotient. The reaction quotient is calculated as a ratio of activities (at non standard state).
+
+The thermodynamic calculations suggest that trace gas oxidation is sufficient to sustain the persistence of all trace gas oxidizers, and thus most bacteria in soils. Power per cell values are well within the range of maintenance or endogenous energies typically reported for pure cultures, and exceed the range for energy-limited ecosystems. Metabolically flexible microbes can use both inorganic and organic substrates. (Bay et al 2021)
+
+
+
