@@ -25,6 +25,7 @@ navbar:
     menu:
     - text: TidyTuesday
       href: https://github.com/tacaro/tidy-tuesdays
+      icon: fa-github
     - text: Trace Gas Oxidation Thermo
       href: geothermo_final/geothermo.html
       icon: fa-file-alt
