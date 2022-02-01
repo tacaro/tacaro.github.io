@@ -1,0 +1,99 @@
+---
+title: "Lipidomic hydrogen stable isotope probing for microbiologists"
+author: "Tristan Caro"
+date: "2/1/2022"
+output: html_document
+---
+
+# What is this document?
+
+This webpage is meant to be a user-friendly howto guide on conducting your own lipidomic stable isotope probing (LH-SIP) using heavy or "deuterated" water ($^2H_2O$). Because its target analyte is microbial lipids, which are synthesized during growth (regardless of an organism's generation time) LH-SIP is a powerful technique for directly measuring the rate at which microorganisms grow, especially slow growing organisms we expect to find in many natural systems. Because many of the techniques and tools used for this approach are complex and outside of the classical microbiology toolkit, we have summarized the workflow here for the benefit of future LH-SIPpers.
+
+If you have questions, please get in touch! I'm happy to chat experimental nitty-gritty or big-picture science.
+
+# Experimental
+
+## Sample collection.
+
+With pre-labeled sample containers, collect your sample, making sure to avoid organic contamination, especially for low-biomass samples. This includes the furnacing of metal or glass for 12 hours at 450˚C, or rinsing appropriate tools with organic solvents.
+
+## Stable isotope addition and incubation
+
+For our soil samples, for example, we want to shoot for an enrichment of up to 500 permil in the heavy isotope.
+
+Some thought should go into the strength of the stable isotope tracer to be used. For our experiments, we use 0.5% D~2~O, as we expect generation times on the order of weeks to months.
+The Kopf Lab's [Isotope Labeling Calculator](https://kopflab.shinyapps.io/isolabel/) is a useful tool for determining the desired labeling strength based on an "order of magnitude" estimate of microbial activity. We are aiming for a target enrichment of around 500 permil due to the constraints of of Isotope Ratio Mass Spectrometry. We can similarly constrain our labeling times based on expected growth rates and tracer strength.
+
+In falcon tubes or equivalent, combine sample with stable isotope tracer to be used. In our case, we used 1mL of 0.5% tracer per g of soil. **It is important that a subset of samples  are immediately flash frozen by submersion in a dry-ice ethanol bath or in liquid nitrogen. These represent the isotopic value of microbial lipids at time point zero `t = 0`, which is an essential parameter use to calculate growth rates.
+
+## Lipid extraction
+
+There are a variety of methods that can be used to extract microbial lipids from a complex mixture. A high-efficiency extraction method is the Bligh & Dyer method (Bligh & Dyer 1959). For a more rapid extraction protocol that is more amenable to higher biomass samples (e.g. soil, clinical, plant, etc.), we have adapted methods from Maytash et al. 2008 and Quideau et al. 2016 that are based on MTBE as opposed to dichloromethane. Because MTBE is less dense than water, it can be pipetted from the top of a phase separated mixture as opposed from the bottom, which makes the wet chemistry more straightforward.
+
+**It is important to add an internal standard to your sample before extraction. For example, 23-phosphatidylcholine (23:0 PC). This represents the extraction standard and is used to assess extraction efficiency.**
+
+The product yielded from the organic extraction is the total lipid extract (TLE).
+
+## Subset TLE
+
+Subset 33 - 50% of the TLE for cold storage. This can be used as a backup or analyzed later.
+
+## Silica column chromatography
+
+In order to select for our analytes of interest, intact polar phospholipids, we suggest silica column chromatography. We use a method adapted from Quideau et al. (2016) to generate a phospholipid extract (PLE), glycolipid extract (GLE), and a neutral lipid extract (NLE). We store our GLE and NLE at -20˚C. PLE continues to downstream derivatization and analysis.
+
+In brief, the silica column chromatography involves dissolving TLE in DCM and adding to a furnaced, pre-conditioned silica-gel column. Neutral lipids elute with DCM; glycolipids with acetone,; phospholipids with methanol.
+
+## Derivatization of PLE to FAMEs
+
+Fatty acid esters (e.g. phospholipids, triglycerides, etc.) can be trans-esterified in the presence of a base catalyst in an anhydrous methanol to make fatty acid methyl esters (FAMEs). This reaction does not methylate free fatty acids because the carboxyl OH group is a poor leaving group in a basic solution.
+
+In brief, we generate a sodium methoxide solution by dissolving sodium hydroxide pellets in anhydrous methanol. We have to be *very careful* about water contamination of our anhydrous methanol because hydrolysis of our sample is the largest detriment to yield (hydrolyzed free fatty acids are irreversibly lost).
+
+**It is important to add another internal standard, for example, 10µg of 21:0 PC, to assess reaction yield.**
+
+In brief, we react a sodium methoxide solution (NaOH-MeOH) with our sample (dissolved in hexane) at room temperature. We quench the reaction by spiking a tiny amount of glacial acetic acid: this rapidly lowers the pH of the solution. We add hexane in order to induce phase separation. FAMEs will preferentially migrate to the organic hexane layer from the polar NaOH-MeOH layer. We remove the organic layer and dry down under a stream of $N_2$.
+
+## PAIBE Addition
+
+**After this reaction, it is important to add a quantification standard, such as 10µg of PAIBE**.
+
+Isobutyl ester palmitate (PAIBE) is added as a quantification standard before running on GC-IRMS. The amount of PAIBE added reflects the order of magnitude abundance of sample present and the expected 21:0 PC concentration, assuming 100% yield from derivatization. In other words, use the estimated analyte concentration from the GC-FID to determine a good amount of PAIBE to add. This sample can then be re-run on the GC-FID to confirm analyte concentrations.
+
+# Analytical
+Gas chromatography is used for all techniques described here. It is important to write similar or identical chromatography programs for each method (FID, MS, IRMS) so that compound quantity, identity, and abundance, can be compared. Without access to a GC-FID, a GC-MS may be used to quantify compounds. We recommend running on a DB-5 HT column, which has served us well and provides additional wiggle room for high temperature oven ramps.
+
+## GC-FID Quantification
+A GC-FID is a powerful tool for quantifying the compound-specific abundance of microbial lipids. We use GC-FID to quantify the yield of our extraction and derivatization relative to the internal standards we added before each step.
+
+Injection of a known standard (external standard) can be used to determine concentration of analyte. Peak area, not amplitude, should be used to determine concentration.
+
+Many compounds can be identified by retention time alone, relative to a multi-compound standard. We recommend two GC-MS standards for compound identification:
+- **BAME**: 26 fatty acid methyl esters commonly found in bacterial isolates.
+- **37FAME**: 37 fatty acid methyl esters across a wide range of masses; includes polyunsaturated compounds that aren't necessarily relevant to microorganisms, but can assist with compound ID.
+Both of these standards are currently available from Sigma-Aldrich/Supelco.
+
+## GC-MS Compound identification
+Via GC-MS, peaks that cannot be called by retention time alone can be identified. GC-MS can also estimate compound abundance, albeit to less precision than a GC-FID. The characteristic `m/z = 74` "McLafferty ion" corresponding to the FAME methyl ester is a helpful mass fragment to search for.
+
+## GC-IRMS 2H Quantification
+
+Via GC-IRMS, isotopic enrichment of analytes can be determined. Using the same GC column/ramp parameters makes tying a peak identity/abundance to isotopic enrichment much easier.
+
+# Turnover calculations
+
+The turnover of a microorganism growing in the presence of an isotopic tracer can be estimated by:
+
+$$
+\mu = - \frac{1}{t} \cdot \ln \left( \frac{F_T - a \cdot F_L}{F_a - a \cdot F_L} \right)
+$$
+
+where F represents the $^2H$ fractional abundance ($^2F$) of the label ($F_L$), enriched biomass at time *t* ($F_T$), and biomass at the start of the experiment when `t = 0` ($F_0$). All of these parameters are directly measured via isotope ratio mass spectrometry.
+
+**NOTE: $^2F$ values that approach or exceed the $^2F$ of the label are considered to have reached saturation. Beyond these values, turnover cannot be sensitively measured, because the production of new biomass will not continue to become enriched after reaching equilibrium with the tracer.**
+
+
+
+
+
+
