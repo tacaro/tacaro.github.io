@@ -11,10 +11,10 @@
 
 
 
-<title>About This Website</title>
+<title>About</title>
 
-<script src="site_libs/header-attrs-2.10/header-attrs.js"></script>
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/header-attrs-2.13/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/yeti.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
@@ -47,6 +47,7 @@
 
 
 
+
 <link rel="stylesheet" href="styles.css" type="text/css" />
 
 
@@ -71,6 +72,9 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
 }
 pre code {
   padding: 0;
@@ -223,7 +227,7 @@ $(document).ready(function () {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -247,7 +251,7 @@ $(document).ready(function () {
   </a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="fa fa-code"></span>
      
     Tools
@@ -256,16 +260,24 @@ $(document).ready(function () {
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="module1.html">Module 1</a>
-    </li>
-    <li>
-      <a href="module2.html">Module 2</a>
+      <a href="https://github.com/tacaro/Prototyping">
+        <span class="fa fa-github"></span>
+         
+        Rapid Prototyping Resources
+      </a>
     </li>
     <li>
       <a href="https://github.com/tacaro/bacdive_lipids">
         <span class="fa fa-github"></span>
          
         BacDive Miner
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/tacaro/picocystis">
+        <span class="fa fa-github"></span>
+         
+        nanoSIMS data processing
       </a>
     </li>
     <li>
@@ -285,7 +297,7 @@ $(document).ready(function () {
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="fa fa-coffee"></span>
      
     Tutorials
@@ -294,10 +306,31 @@ $(document).ready(function () {
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="https://github.com/tacaro/tidy-tuesdays">
+        <span class="fa fa-github"></span>
+         
+        TidyTuesday
+      </a>
+    </li>
+    <li>
       <a href="geothermo_final/geothermo.html">
         <span class="fa fa-file-alt"></span>
          
         Trace Gas Oxidation Thermo
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/tacaro/sky_microbes">
+        <span class="fa fa-github"></span>
+         
+        Sky Microbes
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/tacaro/SHABprotocols">
+        <span class="fa fa-github"></span>
+         
+        HAB Protocols
       </a>
     </li>
   </ul>
@@ -331,12 +364,33 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">About This Website</h1>
+<h1 class="title toc-ignore">About</h1>
 
 </div>
 
 
-<p>More about this website.</p>
+<p>Hi there! I’m Tristan. This is where I publish and keep various tools
+and resources for the broader scientific community. I believe in
+open-source science, data, and protocols.</p>
+<div id="about-me" class="section level3">
+<h3>About me</h3>
+<p>I’m a PhD Candidate at the University of Colorado, Boulder in the <a
+href="https://www.colorado.edu/geologicalsciences/">Department of
+Geological Sciences</a>. I currently work with <a
+href="https://alexistempleton.myportfolio.com/">Alexis Templeton</a> and
+<a href="https://www.kopflab.org/">Sebastian Kopf</a> studying slow
+growing microorganisms. From soil, to permafrost, to the rock-hosted
+subsurface, I am curious how we measure exceptionally slow rates of
+microbial activity and how this activity is localized in
+micro-environments.</p>
+<p>Before my PhD, I was a lab technician in <a
+href="https://naturesmicrocosm.com/">Britt Koskella’s lab</a> at UC
+Berkeley, studying the co-evolution and host-range of bacteriophages in
+the urban phyllosphere. I also worked at the <a
+href="https://www.nasa.gov/ames/research/space-biosciences/david-j-smith-laboratory">NASA
+Aerobiology Lab</a> at NASA Ames Research Center studying how organisms
+survive atmospheric dispersal.</p>
+</div>
 
 
 
