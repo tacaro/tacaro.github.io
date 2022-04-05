@@ -1,5 +1,11 @@
 ---
-title: "About This Website"
+title: "About"
 ---
 
-More about this website.
+Hi there! I'm Tristan. This is where I publish and keep various tools and resources for the broader scientific community. I believe in open-source science, data, and protocols.
+
+### About me
+
+I'm a PhD Candidate at the University of Colorado, Boulder in the [Department of Geological Sciences](https://www.colorado.edu/geologicalsciences/). I currently work with [Alexis Templeton](https://alexistempleton.myportfolio.com/) and [Sebastian Kopf](https://www.kopflab.org/) studying slow growing microorganisms. From soil, to permafrost, to the rock-hosted subsurface, I am curious how we measure exceptionally slow rates of microbial activity and how this activity is localized in micro-environments.
+
+Before my PhD, I was a lab technician in [Britt Koskella's lab](https://naturesmicrocosm.com/) at UC Berkeley, studying the co-evolution and host-range of bacteriophages in the urban phyllosphere. I also worked at the [NASA Aerobiology Lab](https://www.nasa.gov/ames/research/space-biosciences/david-j-smith-laboratory) at NASA Ames Research Center studying how organisms survive atmospheric dispersal.

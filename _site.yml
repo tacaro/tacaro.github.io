@@ -1,4 +1,5 @@
 name: "Tristan Caro"
+title: "Tristan Caro"
 navbar:
   title: Tristan Caro
   left:
@@ -11,8 +12,14 @@ navbar:
   - text: Tools
     icon: fa-code
     menu:
+    - text: Rapid Prototyping Resources
+      href: https://github.com/tacaro/Prototyping
+      icon: fa-github
     - text: BacDive Miner
       href: https://github.com/tacaro/bacdive_lipids
+      icon: fa-github
+    - text: nanoSIMS data processing
+      href: https://github.com/tacaro/picocystis
       icon: fa-github
     - text: Slime Mold Behavior Model
       href: https://github.com/tacaro/slime_mold
@@ -29,6 +36,12 @@ navbar:
     - text: Trace Gas Oxidation Thermo
       href: geothermo_final/geothermo.html
       icon: fa-file-alt
+    - text: Sky Microbes
+      href: https://github.com/tacaro/sky_microbes
+      icon: fa-github
+    - text: HAB Protocols
+      href: https://github.com/tacaro/SHABprotocols
+      icon: fa-github
   right:
   - href: https://github.com/tacaro
     icon: fa-github
