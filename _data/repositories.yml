@@ -1,14 +1,14 @@
 github_users:
-  - torvalds
-  - alshedivat
+  - tacaro
 
 repo_description_lines_max: 2
 
 github_repos:
-  - alshedivat/al-folio
-  - jekyll/jekyll
-  - twbs/bootstrap
-  - jquery/jquery
-  - FortAwesome/Font-Awesome
-  - mathjax/MathJax
-  - jpswalsh/academicons
+  - KopfLab/isoCRDS
+  - tacaro/OpenWGL
+  - tacaro/rSIP-shiny
+  - tacaro/tidy-tuesdays
+  - tacaro/Oman-2023
+  - tacaro/Caro-et-al-Raman-SIP
+  - tacaro/
+  - tacaro/picocystis
