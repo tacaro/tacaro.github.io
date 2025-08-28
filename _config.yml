@@ -629,11 +629,11 @@ jsonresume:
   - work
   - education
   - publications
-  - projects
-  - volunteer
-  - awards
-  - certificates
-  - skills
-  - languages
-  - interests
-  - references
+  #- projects
+  #- volunteer
+  #- awards
+  #- certificates
+  #- skills
+  #- languages
+  #- interests
+  #- references
