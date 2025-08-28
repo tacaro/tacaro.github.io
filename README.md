@@ -1,5 +1,11 @@
 # al-folio
 
+# Notes
+
+- To update the CV pdf, place the new pdf in `assets/pdf/` and update the path in the 
+
+
+
 <div align="center">
 
 [![Preview](readme_preview/al-folio-preview.png)](https://alshedivat.github.io/al-folio/)
