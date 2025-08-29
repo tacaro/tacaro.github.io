@@ -22,12 +22,39 @@
   },
   "work": [
     {
+      "name": "Division of Geological and Planetary Sciences, California Institute of Technology",
+      "position": "Foster & Coco Stanback Postdoctoral Fellow",
+      "url": "",
+      "startDate": "2024-09",
+      "endDate": "present",
+      "summary": "Soil microbiome responses to hydroclimate volatility; physiology of trace gas oxidation; geobiology of glaciovolcanic systems",
+      "highlights": ""
+    },
+    {
       "name": "Department of Geological Sciences, University of Colorado Boulder",
       "position": "Doctoral Candidate",
       "url": "",
       "startDate": "2019-08",
       "endDate": "2024-08",
       "summary": "Thesis: From soil to subsurface: Quantifying microbial activity under energy limitation",
+      "highlights": ""
+    },
+{
+      "name": "University of California, Berkeley",
+      "position": "Lab Technician",
+      "url": "https://naturesmicrocosm.com/",
+      "startDate": "2017",
+      "endDate": "2019",
+      "summary": "Lab technician in the lab of Dr. Britt Koskella, studying microbial succession in the phyllosphere of Bradford Pear, and phage dynamics associated with pathogenesis",
+      "highlights": ""
+    },
+      {
+      "name": "NASA Ames Research Center",
+      "position": "Research Associate/Intern",
+      "url": "",
+      "startDate": "2017",
+      "endDate": "2018",
+      "summary": "Undergraduate research preparing S. cerevisiae for polar stratospheric balloon flight; developing M. extorquens AM1 as a synthetic model organism for astronaut use on the ISS",
       "highlights": ""
     }
   ],
