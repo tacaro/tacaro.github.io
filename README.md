@@ -1,5 +1,3 @@
-# al-folio
-
 # Notes
 
 - To update the CV pdf, place the new pdf in `assets/pdf/` and update the path in the `cv_pdf` field in `_pages/cv.md`.
